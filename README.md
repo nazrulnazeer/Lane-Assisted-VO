@@ -14,11 +14,13 @@ _TODO: Describe your project here — what it does, the approach, datasets used,
 
 ```
 Lane-Assisted-VO/
+├── .devcontainer/              # VS Code Dev Containers config (must be at repo root)
+│   └── devcontainer.json
+│
 ├── docker/                     # Docker environment setup
 │   ├── Dockerfile              # Container definition (CUDA + Python + ML stack)
 │   ├── docker-compose.yml      # GPU passthrough, volumes, ports
-│   └── .devcontainer/
-│       └── devcontainer.json   # VS Code Dev Containers config
+│   └── README.md               # Full environment setup instructions
 │
 ├── scripts/
 │   └── verify_setup.py         # Verify GPU, matplotlib, OpenCV inside container
@@ -51,7 +53,7 @@ The development environment runs inside a Docker container with:
 
 > Full step-by-step setup instructions: [docker/README.md](docker/README.md)
 
-### Quick Start
+### First Time Setup
 
 ```bash
 git clone git@github.com:nazrulnazeer/Lane-Assisted-VO.git
@@ -59,7 +61,38 @@ cd Lane-Assisted-VO/docker
 docker compose up --build
 ```
 
-Then in VS Code: `Ctrl+Shift+P` → `Dev Containers: Open Folder in Container`
+First build takes ~15 minutes (downloads CUDA base image). Subsequent starts take seconds.
+
+Once built, open the repo root folder in VS Code → `Ctrl+Shift+P` → **"Dev Containers: Reopen in Container"**.
+
+### Verify Everything Works
+
+Inside the VS Code terminal (now inside the container):
+```bash
+python scripts/verify_setup.py
+```
+
+---
+
+## Daily Workflow
+
+### Starting work
+```bash
+# 1. Start the container
+cd A:\projects\Lane-Assisted-VO\docker
+docker compose up -d
+
+# 2. Open VS Code — click "Reopen in Container" popup (bottom right)
+#    or: Ctrl+Shift+P → "Dev Containers: Reopen in Container"
+```
+
+### Stopping work
+```bash
+cd A:\projects\Lane-Assisted-VO\docker
+docker compose down
+```
+
+Your code lives on your Windows filesystem and is only mounted into the container — stopping or deleting the container never affects your files.
 
 ---
 
