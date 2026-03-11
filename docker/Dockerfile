@@ -23,11 +23,20 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1 \
 
 RUN pip install --upgrade pip setuptools wheel
 
-# ── Python packages ───────────────────────────────────────────────────────────
+# ── PyTorch with CUDA 12.1 (separate command — needs its own --index-url) ─────
 RUN pip install --no-cache-dir \
-    torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 \
-    # tensorflow[and-cuda] \
-    # jax[cuda12_pip] -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html \
+    torch torchvision torchaudio \
+    --index-url https://download.pytorch.org/whl/cu121
+
+# ── Uncomment below to use TensorFlow instead of PyTorch ─────────────────────
+# RUN pip install --no-cache-dir tensorflow[and-cuda]
+
+# ── Uncomment below to use JAX instead of PyTorch ────────────────────────────
+# RUN pip install --no-cache-dir jax[cuda12_pip] \
+#     -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
+# ── All other Python packages ─────────────────────────────────────────────────
+RUN pip install --no-cache-dir \
     numpy pandas scikit-learn scipy \
     matplotlib seaborn plotly \
     opencv-python Pillow \
