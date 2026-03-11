@@ -1,0 +1,28 @@
+# Force LF line endings for all files on all platforms
+* text=auto eol=lf
+
+# Explicitly LF for these file types
+*.py        text eol=lf
+*.sh        text eol=lf
+*.md        text eol=lf
+*.txt       text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.json      text eol=lf
+*.toml      text eol=lf
+*.cfg       text eol=lf
+*.ini       text eol=lf
+*.env       text eol=lf
+Dockerfile  text eol=lf
+.gitignore  text eol=lf
+
+# Binary files — no line ending conversion
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pt    binary
+*.pth   binary
+*.h5    binary
+*.pkl   binary
